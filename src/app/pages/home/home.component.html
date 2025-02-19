@@ -33,13 +33,13 @@
   </div>
 </section>
 
-<section>
+<section class="container">
   <h2 class="text-3xl text-center py-8">Popular Category</h2>
   <owl-carousel-o [options]="customOptions">
     @for (cat of categories; track cat._id) {
     <ng-template carouselSlide>
-      <div>
-        <img [src]="cat.image" class="w-full h-[250px]" [alt]="cat.name" />
+      <div class="px-1">
+        <img [src]="cat.image" class="w-full h-[220px]" [alt]="cat.name" />
         <h3 class="text-green-600">{{ cat.name }}</h3>
       </div>
     </ng-template>
@@ -47,34 +47,45 @@
   </owl-carousel-o>
 </section>
 
-<section>
+<section class="container">
   <h2 class="text-3xl text-center py-8">Popular Products</h2>
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-    @for (prod of products.slice(0,12); track prod.id) {
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+    @for (prod of products.slice(0,25); track prod.id) {
     <div
       class="card border border-green-400/50 rounded-md overflow-hidden shadow relative"
     >
       <div class="card-img">
         <img
           [src]="prod.imageCover"
-          class="w-full h-[250px] object-contain"
+          class="w-full h-[200px] object-contain"
           [alt]="prod.title"
         />
       </div>
       <div class="card-body px-2 py-4">
-        <h4 class="text-green-500 text-xs">{{ prod.category.name }}</h4>
-        <h3 class="text-medium">{{ prod.title.split("", 2).join(" ") }}</h3>
-        <div class="flex justify-between items-center">
-          <span>{{ prod.price }} EGP</span>
-          <div class="flex items-center">
-            <i class="fas fa-star text-yellow-300"></i>
-            <span class="text-gray-500"> {{ prod.ratingsAverage }}</span>
+        <div>
+          @if (prod.quantity) {
+          <span class="text-green-900 font-semibold"> In Stock  {{prod.quantity}}</span> 
+          }@else if (!prod.quantity) {
+          <span class="text-red-500 font-semibold line-through">Out of stock 0</span>
+          }
+          <hr />
+        </div>
+
+        <div class="pt-2">
+          <h4 class="text-green-500 text-xs">{{ prod.category.name }}</h4>
+          <h3 class="text-medium">{{ prod.title.split(" ", 2).join(" ") }}</h3>
+          <div class="flex justify-between items-center">
+            <span>{{ prod.price }} EGP</span>
+            <div class="flex items-center">
+              <i class="fas fa-star text-yellow-300"></i>
+              <span class="text-gray-500"> {{ prod.ratingsAverage }}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <button
-        class="bg-green-500 py-2 px-10 border rounded w-[90%] block mx-auto"
+        class="bg-green-400 py-1 px-7 border rounded w-[90%] block mx-auto"
       >
         Add To Cart
       </button>

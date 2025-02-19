@@ -8,6 +8,14 @@
     button {
       transform: translateY(0);
       opacity: 1;
+      // background-color: rgb(80, 169, 80);
     }
+  }
+}
+
+.container {
+  padding-inline: {
+    start: 6rem !important;
+    end: 6rem !important;
   }
 }

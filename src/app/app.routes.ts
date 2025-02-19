@@ -15,7 +15,11 @@ export const routes: Routes = [
             { 
                 path: "register", 
                 loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent) 
-            }
+            },
+            { 
+                path: "forgetPass", 
+                loadComponent: () => import('./pages/forgetpassword/forgetpassword.component').then(m => m.ForgetpasswordComponent) 
+            },
         ]
     },
 

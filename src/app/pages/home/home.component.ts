@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
   getCategoryData(): void {
     this._categoriesService.gatAllCategories().subscribe({
       next: (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.categories = res.data;
       },
       error: (err) => {},
