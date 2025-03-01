@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -15,7 +16,13 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   login: FormGroup = new FormGroup({
-    email: new FormControl(null),
-    password: new FormControl(null),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    ]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
+    ]),
   });
 }
