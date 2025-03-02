@@ -71,6 +71,8 @@ export class RegisterComponent {
           this.isLoading = false;
         },
       });
+    } else {
+      this.registerForm.markAllAsTouched();
     }
   }
 

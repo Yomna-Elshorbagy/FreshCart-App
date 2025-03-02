@@ -10,3 +10,7 @@
 .btn-main {
   @apply disabled:bg-green-400 bg-green-600 text-white px-12 py-2  rounded hover:bg-green-800 transition-colors duration-500;
 }
+
+body {
+  font-family: "Montserrat", serif;
+}

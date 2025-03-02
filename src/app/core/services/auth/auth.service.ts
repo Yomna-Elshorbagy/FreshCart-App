@@ -39,7 +39,7 @@ export class AuthService {
 
   setResetPassword(userEmail: string, userPassword: string): Observable<any> {
     return this._httpClient.put(
-      environments.baseUrl + `api/v1/auth/resetPassword`,
+      environments.baseUrl + `/api/v1/auth/resetPassword`,
       {
         email: userEmail,
         newPassword: userPassword,

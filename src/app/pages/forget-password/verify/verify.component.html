@@ -1,6 +1,6 @@
 <section class="w-1/2 mx-auto bg-gray-50 rounded border shadow p-4">
   <h1 class="text-3xl text-center text-green-600 font-light">Verify Otp</h1>
-  <form [formGroup]="VerifyOtp">
+  <form [formGroup]="VerifyOtp" (ngSubmit)="submitForm()">
     <div class="mb-1">
       <label
         for="Otp"
@@ -9,12 +9,19 @@
       >
       <input
         formControlName="resetCode"
+        placeholder="verify OTP"
         type="text"
         id="Otp"
         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
     </div>
 
-    <button class="btn-main">Verify</button>
+    <button class="btn-main" [disabled]="isLoading">
+      Verify @if (isLoading){
+      <span>
+        <i class="fa-solid fa-spinner fa-spin ms-2"></i>
+      </span>
+      }
+    </button>
   </form>
 </section>

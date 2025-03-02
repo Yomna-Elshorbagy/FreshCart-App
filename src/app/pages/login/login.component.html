@@ -1,6 +1,6 @@
 <section class="w-1/2 mx-auto bg-gray-50 rounded border shadow p-4">
   <h1 class="text-3xl text-center text-green-600 font-light">LogIn Now</h1>
-  <form [formGroup]="login">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <div class="mb-1">
       <label
         for="email"
@@ -9,6 +9,7 @@
       >
       <input
         formControlName="email"
+        placeholder="Email"
         type="email"
         id="email"
         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -23,35 +24,42 @@
       >
       <input
         formControlName="password"
+        placeholder="*****"
         type="password"
         id="password"
         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
     </div>
 
-
     <div class="flex justify-between mt-3">
       <div class="flex items-center mb-3">
-        <input
-          type="checkbox"
-          class="border-green-600 accent-green-600"
-        />
+        <input type="checkbox" class="border-green-600 accent-green-600" />
         <span class="text-sm ms-2">Remember Me</span>
       </div>
       <a
-        routerLink="/forgetPass"
+        [routerLink]="['/forgetPass']"
         class="underline text-sm text-main-color"
         >Forgot Password?</a
       >
     </div>
 
-    <button class="btn-main">Log In</button>
+    <button class="btn-main" [disabled]="isLoading">
+      Log In @if (isLoading) {
+      <span>
+        <i class="fa-solid fa-spinner fa-spin ms-2"></i>
+      </span>
+      }
+    </button>
+
+    @if (msgError) {
+    <p class="bg-red-400 text-white px-2 py-4 border mt-2">{{ msgError }}</p>
+    } @if (isSucess) {
+    <p class="bg-green-400 text-white px-2 py-4 border mt-2">{{ isSucess }}</p>
+    }
   </form>
 
   <p class="mt-5 pb-5 text-center">
     Don't have an account ?
-    <a [routerLink]="['/register']" class="underline text-green-600"
-      >Sing up</a
-    >
+    <a [routerLink]="['/register']" class="underline text-green-600">Sing up</a>
   </p>
 </section>
