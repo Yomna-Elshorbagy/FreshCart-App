@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -18,20 +19,42 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ResetpasswordComponent {
   private readonly authService = inject(AuthService);
+  private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
+
   isLoading: boolean = false;
   msgError: string = '';
   isSucess: string = '';
 
-  resetPassword: FormGroup = new FormGroup({
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-    ]),
-    newPassword: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
-    ]),
+  //using FormGroup
+  // resetPassword: FormGroup = new FormGroup({
+  //   email: new FormControl(null, [
+  //     Validators.required,
+  //     Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+  //   ]),
+  //   newPassword: new FormControl(null, [
+  //     Validators.required,
+  //     Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
+  //   ]),
+  // });
+
+  //using Formbuilder
+
+  resetPassword: FormGroup = this.formBuilder.group({
+    email: [
+      null,
+      [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+      ],
+    ],
+    newPassword: [
+      null,
+      [
+        Validators.required,
+        Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
+      ],
+    ],
   });
 
   submitForm(): void {

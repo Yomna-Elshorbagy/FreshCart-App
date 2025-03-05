@@ -3,6 +3,7 @@ import { AuthService } from './../../core/services/auth/auth.service';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
+  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -18,35 +19,48 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
   private readonly authService = inject(AuthService);
+  private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
+
   isLoading: boolean = false;
   msgError: string = '';
   isSucess: string = '';
 
-  registerForm: FormGroup = new FormGroup(
+  registerForm: FormGroup = this.formBuilder.group(
     {
-      name: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(25),
-      ]),
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-      ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
-      ]),
-      rePassword: new FormControl(null, Validators.required),
-      phone: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^01[0125][0-9]{8}$/),
-      ]),
-      terms: new FormControl(null),
+      name: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(25),
+        ],
+      ],
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+        ],
+      ],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Z][\w!@#$%^&*()\-+=]{7,}$/),
+        ],
+      ],
+      rePassword: [
+        null,
+        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+      ],
+      phone: [
+        null,
+        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+      ],
+      terms: [null],
     },
-    // { updateOn: 'submit' },
-    { validators: this.confirmPassword }
+    { Validators: this.confirmPassword }
   );
 
   submitForm(): void {

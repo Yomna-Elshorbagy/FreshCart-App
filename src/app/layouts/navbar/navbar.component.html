@@ -165,13 +165,15 @@
         </li>
         }@else {
         <li>
-          <a
+          <button
             role="button"
             routerLinkActive="bg-red-800 text-white"
             class="block py-2 px-8 rounded-sm text-gray-700"
             aria-current="page"
-            >logOut</a
+            (click)="logOut()"
           >
+            logOut
+          </button>
         </li>
         }
       </ul>
